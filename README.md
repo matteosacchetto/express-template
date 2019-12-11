@@ -106,6 +106,17 @@ Node.js body parsing middleware
 
 
 
+### Http status codes
+
+Helper module to get http status codes and messages
+
+* Version: 1.4.0
+* Website: https://www.npmjs.com/package/http-status-codes
+* Documentation: https://www.npmjs.com/package/http-status-codes
+* Module name: **http-status-codes**
+
+
+
 ## Dev modules
 
 ### Nodemon

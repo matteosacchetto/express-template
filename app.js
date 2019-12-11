@@ -6,9 +6,11 @@ const morgan = require('morgan')
 const helmet = require('helmet')
 const compression = require('compression')
 const bodyParser = require('body-parser')
+const httpStatusCodes = require('http-status-codes')
 
 // Custom modules
 const logger = require('./lib/logger.js')
+const utils = require('./lib/utils.js')
 
 // Custom routes
 const apiRoute = require('./routes/api.js')
