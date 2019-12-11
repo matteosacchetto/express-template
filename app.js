@@ -5,8 +5,8 @@ const https = require('https');
 
 // App settings
 const app = express()
-const httpPort = process.env.PORT || 80
-const httpsPort = process.env.PORT_HTTPS || 443
+const httpPort = process.env.PORT || 8000
+const httpsPort = process.env.PORT_HTTPS || 44300
 
 // Options
 const opt_http = true
