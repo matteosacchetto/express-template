@@ -95,6 +95,17 @@ Module used to compress responses. Useful especially in production since it help
 
 
 
+### Body-parser
+
+Node.js body parsing middleware
+
+* Version: 1.19.0
+* Website: https://github.com/expressjs/body-parser
+* Documentation: https://github.com/expressjs/body-parser
+* Module name: **body-parser**
+
+
+
 ## Dev modules
 
 ### Nodemon

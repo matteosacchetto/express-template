@@ -5,6 +5,7 @@ const https = require('https')
 const morgan = require('morgan')
 const helmet = require('helmet')
 const compression = require('compression')
+const bodyParser = require('body-parser')
 
 // Custom modules
 const logger = require('./lib/logger.js')
@@ -22,6 +23,8 @@ const opt_https = false
 const app = express()
 
 // Define middlewares
+app.use(bodyParser.urlencoded({ extended: false })) // Parse application/x-www-form-urlencoded
+app.use(bodyParser.json()) // Parse application/json
 app.use(helmet())
 
 if(environment === 'development') {
