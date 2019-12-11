@@ -3,7 +3,8 @@ const express = require('express')
 const http = require('http')
 const https = require('https')
 const morgan = require('morgan')
-const logger = require('./lib/logger.js');
+const logger = require('./lib/logger.js')
+const helmet = require('helmet')
 
 // App settings
 const httpPort = process.env.PORT || 8000
@@ -18,6 +19,8 @@ const opt_https = false
 const app = express()
 
 // Define middlewares
+app.use(helmet())
+
 if(environment === 'development') {
   // Middlewares used in development
   app.use(morgan('dev', { stream: logger.stream }))

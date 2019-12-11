@@ -73,6 +73,17 @@ Module used to access the root path from any file, without the need to use '..' 
 
 
 
+### Helmet
+
+Module that helps to secure an express-based app by setting various HTTP headers. *It’s not a silver bullet*, but it can help!
+
+* Version: 3.21.2
+* Website: https://helmetjs.github.io/
+* Documentation: https://helmetjs.github.io/docs/
+* Module name: **helmet**
+
+
+
 ## Dev modules
 
 ### Nodemon
@@ -80,8 +91,6 @@ Module used to access the root path from any file, without the need to use '..' 
 Module used to auto-reload the app when changes are detected
 
 * Version: 2.0.1
-
 * Website: https://nodemon.io/
-
 * Documentation: https://github.com/remy/nodemon#nodemon
 
