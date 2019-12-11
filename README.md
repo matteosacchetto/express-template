@@ -117,6 +117,17 @@ Helper module to get http status codes and messages
 
 
 
+### Express rate limit
+
+Module to limit the amount of request that can be performed to the server
+
+* Version: 5.0.0
+* Website: https://www.npmjs.com/package/express-rate-limit
+* Documentation: https://www.npmjs.com/package/express-rate-limit
+* Module name: **express-rate-limit**
+
+
+
 ## Dev modules
 
 ### Nodemon

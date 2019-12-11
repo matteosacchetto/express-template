@@ -7,6 +7,7 @@ const helmet = require('helmet')
 const compression = require('compression')
 const bodyParser = require('body-parser')
 const httpStatusCodes = require('http-status-codes')
+const rateLimit = require("express-rate-limit")
 
 // Custom modules
 const logger = require('./lib/logger.js')
@@ -19,16 +20,23 @@ const apiRoute = require('./routes/api.js')
 const httpPort = process.env.PORT || 8000
 const httpsPort = process.env.PORT_HTTPS || 44300
 const environment = process.env.NODE_ENV || 'development'
+const limiter = rateLimit({
+  windowMs: 10 * 60 * 1000, // 10 minutes
+  max: 250, // limit each IP to 250 requests per windowMs
+  message: utils.createResponse(429)
+})
 
 // Options
 const opt_http = true
 const opt_https = false
-const opt_static = true
+const opt_static = false
+const opt_reverse_proxy = false
 
 // Create app
 const app = express()
 
 // Define middlewares
+app.use(limiter) // Apply the limit to all requests
 app.use(bodyParser.urlencoded({ extended: false })) // Parse application/x-www-form-urlencoded
 app.use(bodyParser.json()) // Parse application/json
 app.use(helmet())
@@ -58,7 +66,7 @@ if(opt_http) {
   // It listens on port httpPort
   httpServer.listen(httpPort, () => {
   	logger.info(`HTTP Server running on port ${httpPort}`)
-  });
+  })
 }
 
 if(opt_https) {
@@ -71,7 +79,7 @@ if(opt_https) {
   	key: privateKey,
   	cert: certificate,
   	ca: ca
-  };
+  }
 
   // Starting https server
   const httpsServer = https.createServer(credentials, app)
@@ -79,5 +87,5 @@ if(opt_https) {
   // It listens on port httpsServer
   httpsServer.listen(httpsPort, () => {
   	logger.info(`HTTPS Server running on port ${httpsPort}`)
-  });
+  })
 }

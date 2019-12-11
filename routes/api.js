@@ -16,22 +16,22 @@ router
   .get((req, res, next) => {
     res
       .status(200)
-      .send(utils.createResponse(200,{method: req.method}))
+      .send(utils.createResponse(200,{ method: req.method }))
   })
   .post((req, res, next) => {
     res
       .status(200)
-      .send(utils.createResponse(200,{method: req.method}))
+      .send(utils.createResponse(200,{ method: req.method }))
   })
   .put((req, res, next) => {
     res
       .status(200)
-      .send(utils.createResponse(200,{method: req.method}))
+      .send(utils.createResponse(200,{ method: req.method }))
   })
   .delete((req, res, next) => {
     res
       .status(200)
-      .send(utils.createResponse(200,{method: req.method}))
+      .send(utils.createResponse(200,{ method: req.method }))
   })
 
 // Export the router
