@@ -2,16 +2,30 @@
 const express = require('express')
 const http = require('http');
 const https = require('https');
+const morgan = require('morgan')
 
 // App settings
-const app = express()
 const httpPort = process.env.PORT || 8000
 const httpsPort = process.env.PORT_HTTPS || 44300
+const environment = process.env.NODE_ENV || "development"
 
 // Options
 const opt_http = true
 const opt_https = false
 
+// Create app
+const app = express()
+
+// Define middlewares
+/*** Morgan ***/
+if(environment === "development") {
+  app.use(morgan('dev'))
+}
+else if(environment === "production") {
+  app.use(morgan('combined'))
+}
+
+// Define routes
 app.get('/', (req, res) => {
   res.send('Hello World!')
 })

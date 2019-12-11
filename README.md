@@ -23,12 +23,24 @@ Module used to create a server/RESTful API
 Modules used to explicitly create a HTTP and HTTPS server
 
 * Enviroment variables used:
-  * process.env.PORT: to specify the HTTP 
-  * process.env.PORT_HTTPS: to specify the HTTPS
+  * process.env.PORT: specify the HTTP port (_default=8000_)
+  * process.env.PORT_HTTPS: specify the HTTPS port (_default=44300_)
 * Version: NodeJS version
 * Documentation: 
   * HTTP: https://nodejs.org/api/http.html
   * HTTPS: https://nodejs.org/api/https.html
+
+
+
+### Morgan
+
+Module used to log HTTP requests
+
+* Enviroment variables used:
+  * process.env.NODE_ENV: specify the enviroment (_default="development"_)
+* Version: 1.9.1
+* Website: https://www.npmjs.com/package/morgan
+* Documentation: https://www.npmjs.com/package/morgan
 
 
 
@@ -37,6 +49,8 @@ Modules used to explicitly create a HTTP and HTTPS server
 ### Nodemon
 
 Module used to auto-reload the app when changes are detected
+
+* Version: 2.0.1
 
 * Website: https://nodemon.io/
 
