@@ -84,6 +84,17 @@ Module that helps to secure an express-based app by setting various HTTP headers
 
 
 
+### Compression
+
+Module used to compress responses. Useful especially in production since it helps to improve the performances
+
+* Version: 1.7.4
+* Website: https://github.com/expressjs/compression
+* Documentation: https://github.com/expressjs/compression
+* Module name: **compression**
+
+
+
 ## Dev modules
 
 ### Nodemon

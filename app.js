@@ -1,10 +1,13 @@
-// Modules
+// Node modules
 const express = require('express')
 const http = require('http')
 const https = require('https')
 const morgan = require('morgan')
-const logger = require('./lib/logger.js')
 const helmet = require('helmet')
+const compression = require('compression')
+
+// Custom modules
+const logger = require('./lib/logger.js')
 
 // App settings
 const httpPort = process.env.PORT || 8000
@@ -28,6 +31,7 @@ if(environment === 'development') {
 else if(environment === 'production') {
   // Middlewares used in production
   app.use(morgan('combined', { stream: logger.stream }))
+  app.use(compression())
 }
 
 // Define routes
