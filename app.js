@@ -1,13 +1,14 @@
 // Modules
 const express = require('express')
-const http = require('http');
-const https = require('https');
+const http = require('http')
+const https = require('https')
 const morgan = require('morgan')
+const logger = require('./lib/logger.js');
 
 // App settings
 const httpPort = process.env.PORT || 8000
 const httpsPort = process.env.PORT_HTTPS || 44300
-const environment = process.env.NODE_ENV || "development"
+const environment = process.env.NODE_ENV || 'development'
 
 // Options
 const opt_http = true
@@ -17,12 +18,13 @@ const opt_https = false
 const app = express()
 
 // Define middlewares
-/*** Morgan ***/
-if(environment === "development") {
-  app.use(morgan('dev'))
+if(environment === 'development') {
+  // Middlewares used in development
+  app.use(morgan('dev', { stream: logger.stream }))
 }
-else if(environment === "production") {
-  app.use(morgan('combined'))
+else if(environment === 'production') {
+  // Middlewares used in production
+  app.use(morgan('combined', { stream: logger.stream }))
 }
 
 // Define routes
@@ -35,15 +37,15 @@ if(opt_http) {
   const httpServer = http.createServer(app);
 
   httpServer.listen(httpPort, () => {
-  	console.log(`HTTP Server running on port ${httpPort}`);
+  	logger.info(`HTTP Server running on port ${httpPort}`)
   });
 }
 
 if(opt_https) {
   // Certificate
-  const privateKey = fs.readFileSync('key.pem', 'utf8');
-  const certificate = fs.readFileSync('cert.pem', 'utf8');
-  const ca = fs.readFileSync('chain.pem', 'utf8');
+  const privateKey = fs.readFileSync('key.pem', 'utf8')
+  const certificate = fs.readFileSync('cert.pem', 'utf8')
+  const ca = fs.readFileSync('chain.pem', 'utf8')
 
   const credentials = {
   	key: privateKey,
@@ -52,9 +54,9 @@ if(opt_https) {
   };
 
   // Starting https server
-  const httpsServer = https.createServer(credentials, app);
+  const httpsServer = https.createServer(credentials, app)
 
   httpsServer.listen(httpsPort, () => {
-  	console.log(`HTTPS Server running on port ${httpsPort}`);
+  	logger.info(`HTTPS Server running on port ${httpsPort}`)
   });
 }
