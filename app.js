@@ -10,6 +10,9 @@ const bodyParser = require('body-parser')
 // Custom modules
 const logger = require('./lib/logger.js')
 
+// Custom routes
+const apiRoute = require('./routes/api.js')
+
 // App settings
 const httpPort = process.env.PORT || 8000
 const httpsPort = process.env.PORT_HTTPS || 44300
@@ -18,6 +21,7 @@ const environment = process.env.NODE_ENV || 'development'
 // Options
 const opt_http = true
 const opt_https = false
+const opt_static = true
 
 // Create app
 const app = express()
@@ -29,7 +33,7 @@ app.use(helmet())
 
 if(environment === 'development') {
   // Middlewares used in development
-  app.use(morgan('dev', { stream: logger.stream }))
+  app.use(morgan('tiny', { stream: logger.stream }))
 }
 else if(environment === 'production') {
   // Middlewares used in production
@@ -37,15 +41,19 @@ else if(environment === 'production') {
   app.use(compression())
 }
 
-// Define routes
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
+// Define routes -> TODO: write here your code
+app.use('/api', apiRoute)
+
+if(opt_static) {
+  // Define static folder
+  app.use(express.static('public'))
+}
 
 if(opt_http) {
   // Starting http server
   const httpServer = http.createServer(app);
 
+  // It listens on port httpPort
   httpServer.listen(httpPort, () => {
   	logger.info(`HTTP Server running on port ${httpPort}`)
   });
@@ -66,6 +74,7 @@ if(opt_https) {
   // Starting https server
   const httpsServer = https.createServer(credentials, app)
 
+  // It listens on port httpsServer
   httpsServer.listen(httpsPort, () => {
   	logger.info(`HTTPS Server running on port ${httpsPort}`)
   });
