@@ -11,10 +11,9 @@
 Module used to create a server/RESTful API
 
 * Version: 4.17.1
-
 * Website: https://expressjs.com/en
-
 * Documentation: https://expressjs.com/en/4x/api.html
+* Module name: **express**
 
 
 
@@ -29,6 +28,9 @@ Modules used to explicitly create a HTTP and HTTPS server
 * Documentation: 
   * HTTP: https://nodejs.org/api/http.html
   * HTTPS: https://nodejs.org/api/https.html
+* Modules name:
+  * **http** 
+  * **https**
 
 
 
@@ -41,6 +43,33 @@ Module used to log HTTP requests
 * Version: 1.9.1
 * Website: https://www.npmjs.com/package/morgan
 * Documentation: https://www.npmjs.com/package/morgan
+* Module name: **morgan**
+
+
+
+### Winston
+
+Module used to define different loggers
+
+Useful together with morgan
+
+* Enviroment variables used:
+  * process.env.NODE_ENV: specify the enviroment (_default="development"_)
+* Version: 3.2.1
+* Website: https://www.npmjs.com/package/winston
+* Documentation: https://www.npmjs.com/package/winston
+* Module name: **winston**
+
+
+
+### App root path
+
+Module used to access the root path from any file, without the need to use '..' and '.'
+
+* Version: 3.0.0
+* Website: https://www.npmjs.com/package/app-root-path
+* Documentation: https://www.npmjs.com/package/app-root-path
+* Module name: **app-root-path**
 
 
 
