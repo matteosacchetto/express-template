@@ -128,6 +128,17 @@ Module to limit the amount of request that can be performed to the server
 
 
 
+### Dotenv
+
+Module to load configuration from a .env file
+
+* Version: 8.2.0
+* Website: https://www.npmjs.com/package/dotenv
+* Documentation: https://www.npmjs.com/package/dotenv
+* Module name: **dotenv**
+
+
+
 ## Dev modules
 
 ### Nodemon

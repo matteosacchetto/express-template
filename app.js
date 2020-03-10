@@ -8,6 +8,7 @@ const compression = require('compression')
 const bodyParser = require('body-parser')
 const httpStatusCodes = require('http-status-codes')
 const rateLimit = require("express-rate-limit")
+const dotenv = require('dotenv')
 
 // Custom modules
 const logger = require('./lib/logger.js')
@@ -16,7 +17,8 @@ const utils = require('./lib/utils.js')
 // Custom routes
 const apiRoute = require('./routes/api.js')
 
-// App settings
+// Loading App Settings
+dotenv.config()
 const httpPort = process.env.PORT || 8000
 const httpsPort = process.env.PORT_HTTPS || 44300
 const environment = process.env.NODE_ENV || 'development'
