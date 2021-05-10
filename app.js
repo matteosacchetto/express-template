@@ -16,7 +16,11 @@ const config =  require('./lib/config.js')
 
 // Custom modules
 const logger = require('./lib/logger.js')
-const utils = require('./lib/utils.js')
+const httpUtils = require('./lib/http-utils.js')
+
+// Custom middlewares
+const responseStatus = require('./middlewares/response-status.js');
+const apiNotFound = require('./middlewares/api-not-found');
 
 // Custom routes
 const apiRoute = require('./routes/api.js')
@@ -24,7 +28,7 @@ const apiRoute = require('./routes/api.js')
 const limiter = rateLimit({
   windowMs: 1 * 60 * 1000, // 1 minute
   max: 250, // limit each IP to 250 requests per windowMs
-  message: utils.createResponse(429)
+  message: httpUtils.createResponse(429)
 })
 
 // Create app
@@ -42,18 +46,21 @@ else if(config.environment === 'production') {
 }
 
 // Define middlewares
-app.use(limiter) // Apply the limit to all requests
 app.use(express.urlencoded({ extended: true })) // Parse application/x-www-form-urlencoded
 app.use(express.json()) // Parse application/json
 app.use(helmet())
 app.use(hpp())
 
+// Define API middlewares
+app.use('/api', limiter); // Apply the limit to all API requests
+app.use('/api', responseStatus); // HTTP response status is coherent with message status
+
 // Define routes -> TODO: write here your code
-app.use('/api', apiRoute)
+app.use('/api/v1', apiRoute)
 
 if(config.useStatic) {
   // Define static folder
-  app.use(express.static('public'))
+  app.use(express.static(config.staticFolder))
 
   if(config.serveSPA) {
     // We want to server a Single Page Application (SPA)
@@ -61,7 +68,15 @@ if(config.useStatic) {
       res.sendFile('index.html', { root: config.staticFolder });
     });
   }
+  
+  // Handle '*' on api
+  app.use('/api', apiNotFound); // If a request for the /api/* has not been served => return 404
 }
+else {
+  // Handle '*' on /
+  app.use('/', apiNotFound); // If a request for the /* has not been served => return 404
+}
+
 
 if(config.useHttp) {
   // Starting http server
