@@ -6,9 +6,9 @@ const fs = require('fs')
 const morgan = require('morgan')
 const helmet = require('helmet')
 const compression = require('compression')
-const bodyParser = require('body-parser')
 const httpStatusCodes = require('http-status-codes')
 const rateLimit = require("express-rate-limit")
+const hpp = require('hpp')
 const dotenv = require('dotenv')
 
 // Custom modules
@@ -38,12 +38,7 @@ const opt_reverse_proxy = false
 // Create app
 const app = express()
 
-// Define middlewares
-app.use(limiter) // Apply the limit to all requests
-app.use(bodyParser.urlencoded({ extended: false })) // Parse application/x-www-form-urlencoded
-app.use(bodyParser.json()) // Parse application/json
-app.use(helmet())
-
+// Define logging middlewares
 if(environment === 'development') {
   // Middlewares used in development
   app.use(morgan('tiny', { stream: logger.stream }))
@@ -53,6 +48,13 @@ else if(environment === 'production') {
   app.use(morgan('combined', { stream: logger.stream }))
   app.use(compression())
 }
+
+// Define middlewares
+app.use(limiter) // Apply the limit to all requests
+app.use(express.urlencoded({ extended: true })) // Parse application/x-www-form-urlencoded
+app.use(express.json()) // Parse application/json
+app.use(helmet())
+app.use(hpp())
 
 // Define routes -> TODO: write here your code
 app.use('/api', apiRoute)
