@@ -24,6 +24,7 @@
   + [Express rate limit](#express-rate-limit)
   + [Dotenv](#dotenv)
   + [HPP](#hpp)
+  + [Express-mung](#express-mung)
 * [Dev modules](#dev-modules)
   + [Nodemon](#nodemon)
 
@@ -278,6 +279,17 @@ Module to protect against HTTP Parameter Pollution attacks.
 * Website: https://www.npmjs.com/package/hpp
 * Documentation: https://www.npmjs.com/package/hpp
 * Module name: **hpp**
+
+
+
+### Express-mung
+
+Module to create middlewares accessing the body data
+
+* Version: 0.5.1
+* Website: https://www.npmjs.com/package/express-mung
+* Documentation: https://www.npmjs.com/package/express-mung
+* Module name: **express-mung**
 
 
 
