@@ -54,6 +54,13 @@ app.use('/api', apiRoute)
 if(config.useStatic) {
   // Define static folder
   app.use(express.static('public'))
+
+  if(config.serveSPA) {
+    // We want to server a Single Page Application (SPA)
+    app.get('*', (req, res) => {
+      res.sendFile('index.html', { root: config.staticFolder });
+    });
+  }
 }
 
 if(config.useHttp) {

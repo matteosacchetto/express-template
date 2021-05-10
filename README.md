@@ -136,6 +136,9 @@ These are the environment variables that can be defined in the .env file
 * **USE_STATIC**: to specify whether to serve static files or not. (_default: **false**_)
   * **false**: do **not** server static files
   * **true**: do serve static files
+* **SERVE_SPA**: to specify whether the static files are of a Single Page Application (SPA) or not. (_default: **false**_)
+  * **false**: they are **not** files of a SPA
+  * **true**: they are files of a spa
 * **STATIC_PATH**: the path of the folder which contains static files. The path is relative with respect to the project folder (_default: **client/public**_)
 * **USE_STDOUT**: specifies whether to log to files or to stdout (useful when in a docker container). (_default: **false**_)
 * **APP_ROOT_PATH**: this is used to identify the root directory of the source code of the server. There is no need to specify it, since it is able to auto-decalare it, but it is available if for some reason you want to specify it. (default: **.**)
