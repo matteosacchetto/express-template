@@ -51,9 +51,17 @@ app.use(express.json()) // Parse application/json
 app.use(helmet())
 app.use(hpp())
 
-// Define API middlewares
-app.use('/api', limiter); // Apply the limit to all API requests
-app.use('/api', responseStatus); // HTTP response status is coherent with message status
+// Define custom middleware
+if(config.useStatic) {
+  // Define API middlewares
+  app.use('/api', limiter); // Apply the limit to all API requests
+  app.use('/api', responseStatus); // HTTP response status is coherent with message status
+}
+else {
+  // Use the custom middlewares on all requests
+  app.use('/', limiter); // Apply the limit to all API requests
+  app.use('/', responseStatus); // HTTP response status is coherent with message status
+}
 
 // Define routes -> TODO: write here your code
 app.use('/api/v1', apiRoute)
@@ -68,15 +76,13 @@ if(config.useStatic) {
       res.sendFile('index.html', { root: config.staticFolder });
     });
   }
-  
-  // Handle '*' on api
+  // Handle '*' on /api
   app.use('/api', apiNotFound); // If a request for the /api/* has not been served => return 404
 }
 else {
-  // Handle '*' on /
+  // Handle '*' on all requests (/)
   app.use('/', apiNotFound); // If a request for the /* has not been served => return 404
 }
-
 
 if(config.useHttp) {
   // Starting http server
