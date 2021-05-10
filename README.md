@@ -1,6 +1,145 @@
 # Express template
 
-**NodeJS template** for building an **express** based application
+**NodeJS template** for building an **express** based server
+
+
+
+## Table of contents
+
+* [Setup](#setup)
+  + [Set a LICENSE](#set-a-license)
+  + [Update the package.json](#update-the-packagejson)
+  + [Install the dependencies](#install-the-dependencies)
+  + [Start the application](#start-the-application)
+* [Environment variables](#environment-variables)
+* [Modules](#modules)
+  + [Express](#express)
+  + [Http and Https](#http-and-https)
+  + [Morgan](#morgan)
+  + [Winston](#winston)
+  + [App root path](#app-root-path)
+  + [Helmet](#helmet)
+  + [Compression](#compression)
+  + [Http status codes](#http-status-codes)
+  + [Express rate limit](#express-rate-limit)
+  + [Dotenv](#dotenv)
+  + [HPP](#hpp)
+* [Dev modules](#dev-modules)
+  + [Nodemon](#nodemon)
+
+
+
+## Setup
+
+Once the repository has been initialized from this template, or the template has been cloned, execute the following steps:
+
+
+
+### Set a LICENSE
+
+By default i configured the template to use a MIT license, but if you want to use a different license, change the LICENSE file and the `license: "MIT"` attribute of the [package.json](package.json) file.
+
+
+
+### Update the package.json
+
+In particular you **need** to modify/set the following attributes of the [package.json](package.json):
+
+* name
+* version [OPTIONAL]
+* description
+* author
+* contributors [OPTIONAL]
+* license
+
+
+
+### Install the dependencies
+
+You can install the dependencies by running the following command
+
+```bash
+npm install
+```
+
+This will take a while.
+
+
+
+### Start the application
+
+You can start the application in two different ways
+
+If you want hot reload, that is available through [nodemon](https://www.npmjs.com/package/nodemon) using the dev script
+
+```bash
+npm run dev
+```
+
+or using nodemon directly
+
+```bash
+nodemon .
+```
+
+
+
+Otherwise, if you want to start the server without hot reloading, you can either use the start script
+
+```bash
+npm start
+```
+
+or you can use node directly
+
+```bash
+node .
+```
+
+
+
+By default this will start a server on http://localhost:8000. 
+
+To modify these values you can simply create a .env file containing all required settings.
+
+For example:
+
+```
+# Settings HTTP
+USE_HTTP=true
+PORT=4464
+```
+
+
+To see a richer example of the .env file take a look at the [.env.example](../.env.example) file in the root folder of the project
+
+
+
+
+## Environment variables
+
+These are the environment variables that can be defined in the .env file
+
+* **USE_HTTP**: to specify whether to start a HTTP server or not. (_default: **true**_)
+  * **false**: do **not** start the HTTP server
+  * **true**: do start the HTTP server
+* **PORT**: the port on which the HTTP server will listen (_default: **8000**_)
+* **USE_HTTPS**: to specify whether to start a HTTPS server or not. (_default: **false**_)
+  * **false**: do **not** start the HTTPS server
+  * **true**: do start the HTTPS server
+* **PORT_HTTPS**: the port on which the HTTPS server will listen (_default: **44300**_)
+* **NODE_ENV**: the environment {development, production} (_default: **development**_)
+* **SSL_KEY_PATH**: to specify the path to the ssl key to use.  (_default **'ssl/key.pem'**_)
+  **NOTE**: it is only used if the **NODE_ENV** is set to _production_ and **USE_HTTPS** is set to _true_
+* **SSL_CERT_PATH**: to specify the path to the ssl certificate to use.  (_default **'ssl/cert.pem'**_)
+  **NOTE**: it is only used if the **NODE_ENV** is set to _production_ and **USE_HTTPS** is set to _true_
+* **USE_STATIC**: to specify whether to serve static files or not. (_default: **false**_)
+  * **false**: do **not** server static files
+  * **true**: do serve static files
+* **STATIC_PATH**: the path of the folder which contains static files. The path is relative with respect to the project folder (_default: **client/public**_)
+* **USE_STDOUT**: specifies whether to log to files or to stdout (useful when in a docker container). (_default: **false**_)
+* **APP_ROOT_PATH**: this is used to identify the root directory of the source code of the server. There is no need to specify it, since it is able to auto-decalare it, but it is available if for some reason you want to specify it. (default: **.**)
+
 
 
 
@@ -148,4 +287,3 @@ Module used to auto-reload the app when changes are detected
 * Version: 2.0.1
 * Website: https://nodemon.io/
 * Documentation: https://github.com/remy/nodemon#nodemon
-

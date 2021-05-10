@@ -11,6 +11,9 @@ const rateLimit = require("express-rate-limit")
 const hpp = require('hpp')
 const dotenv = require('dotenv')
 
+// Load App settings
+const config =  require('./lib/config.js')
+
 // Custom modules
 const logger = require('./lib/logger.js')
 const utils = require('./lib/utils.js')
@@ -18,32 +21,21 @@ const utils = require('./lib/utils.js')
 // Custom routes
 const apiRoute = require('./routes/api.js')
 
-// Loading App Settings
-dotenv.config()
-const httpPort = process.env.PORT || 8000
-const httpsPort = process.env.PORT_HTTPS || 44300
-const environment = process.env.NODE_ENV || 'development'
 const limiter = rateLimit({
-  windowMs: 10 * 60 * 1000, // 10 minutes
+  windowMs: 1 * 60 * 1000, // 1 minute
   max: 250, // limit each IP to 250 requests per windowMs
   message: utils.createResponse(429)
 })
-
-// Options
-const opt_http = true
-const opt_https = false
-const opt_static = false
-const opt_reverse_proxy = false
 
 // Create app
 const app = express()
 
 // Define logging middlewares
-if(environment === 'development') {
+if(config.environment === 'development') {
   // Middlewares used in development
   app.use(morgan('tiny', { stream: logger.stream }))
 }
-else if(environment === 'production') {
+else if(config.environment === 'production') {
   // Middlewares used in production
   app.use(morgan('combined', { stream: logger.stream }))
   app.use(compression())
@@ -59,38 +51,36 @@ app.use(hpp())
 // Define routes -> TODO: write here your code
 app.use('/api', apiRoute)
 
-if(opt_static) {
+if(config.useStatic) {
   // Define static folder
   app.use(express.static('public'))
 }
 
-if(opt_http) {
+if(config.useHttp) {
   // Starting http server
   const httpServer = http.createServer(app);
 
   // It listens on port httpPort
-  httpServer.listen(httpPort, () => {
-  	logger.info(`HTTP Server running on port ${httpPort}`)
+  httpServer.listen(config.httpPort, () => {
+  	logger.info(`HTTP Server running on port ${config.httpPort}`)
   })
 }
 
-if(opt_https) {
+if(config.useHttps) {
   // Certificate
-  const privateKey = fs.readFileSync('key.pem', 'utf8')
-  const certificate = fs.readFileSync('cert.pem', 'utf8')
-  const ca = fs.readFileSync('chain.pem', 'utf8')
+  const privateKey = fs.readFileSync(config.sslKeyPath, 'utf8')
+  const certificate = fs.readFileSync(config.sslCertPath, 'utf8')
 
   const credentials = {
   	key: privateKey,
-  	cert: certificate,
-  	ca: ca
+  	cert: certificate
   }
 
   // Starting https server
   const httpsServer = https.createServer(credentials, app)
 
   // It listens on port httpsServer
-  httpsServer.listen(httpsPort, () => {
-  	logger.info(`HTTPS Server running on port ${httpsPort}`)
+  httpsServer.listen(config.httpsPort, () => {
+  	logger.info(`HTTPS Server running on port ${config.httpsPort}`)
   })
 }
