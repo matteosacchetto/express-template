@@ -95,17 +95,6 @@ Module used to compress responses. Useful especially in production since it help
 
 
 
-### Body-parser
-
-Node.js body parsing middleware
-
-* Version: 1.19.0
-* Website: https://github.com/expressjs/body-parser
-* Documentation: https://github.com/expressjs/body-parser
-* Module name: **body-parser**
-
-
-
 ### Http status codes
 
 Helper module to get http status codes and messages
@@ -136,6 +125,17 @@ Module to load configuration from a .env file
 * Website: https://www.npmjs.com/package/dotenv
 * Documentation: https://www.npmjs.com/package/dotenv
 * Module name: **dotenv**
+
+
+
+### HPP
+
+Module to protect against HTTP Parameter Pollution attacks.
+
+* Version: 0.2.3
+* Website: https://www.npmjs.com/package/hpp
+* Documentation: https://www.npmjs.com/package/hpp
+* Module name: **hpp**
 
 
 
