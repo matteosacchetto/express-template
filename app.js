@@ -27,7 +27,7 @@ const apiRoute = require('./routes/api.js')
 
 const limiter = rateLimit({
   windowMs: 1 * 60 * 1000, // 1 minute
-  max: 2, // limit each IP to 250 requests per windowMs
+  max: 250, // limit each IP to 250 requests per windowMs
   message: httpUtils.createResponse(429)
 })
 
@@ -76,7 +76,6 @@ if(config.useStatic) {
       res.sendFile('index.html', { root: config.staticFolder });
     });
   }
-
   // Handle '*' on /api
   app.use('/api', apiNotFound); // If a request for the /api/* has not been served => return 404
 }
@@ -84,7 +83,6 @@ else {
   // Handle '*' on all requests (/)
   app.use('/', apiNotFound); // If a request for the /* has not been served => return 404
 }
-
 
 if(config.useHttp) {
   // Starting http server
