@@ -270,7 +270,6 @@ Module to load configuration from a .env file
 * Module name: **dotenv**
 
 
-
 ### HPP
 
 Module to protect against HTTP Parameter Pollution attacks.
@@ -290,7 +289,6 @@ Module to create middlewares accessing the body data
 * Website: https://www.npmjs.com/package/express-mung
 * Documentation: https://www.npmjs.com/package/express-mung
 * Module name: **express-mung**
-
 
 
 ## Dev modules
