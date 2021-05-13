@@ -19,8 +19,8 @@ const logger = require('./lib/logger.js')
 const httpUtils = require('./lib/http-utils.js')
 
 // Custom middlewares
-const responseStatus = require('./middlewares/response-status.js');
-const apiNotFound = require('./middlewares/api-not-found');
+const responseStatus = require('./middlewares/response-status.js')
+const apiNotFound = require('./middlewares/api-not-found')
 
 // Custom routes
 const apiRoute = require('./routes/api.js')
@@ -54,13 +54,13 @@ app.use(hpp())
 // Define custom middleware
 if(config.useStatic) {
   // Define API middlewares
-  app.use('/api', limiter); // Apply the limit to all API requests
-  app.use('/api', responseStatus); // HTTP response status is coherent with message status
+  app.use('/api', limiter) // Apply the limit to all API requests
+  app.use('/api', responseStatus) // HTTP response status is coherent with message status
 }
 else {
   // Use the custom middlewares on all requests
-  app.use('/', limiter); // Apply the limit to all API requests
-  app.use('/', responseStatus); // HTTP response status is coherent with message status
+  app.use('/', limiter) // Apply the limit to all API requests
+  app.use('/', responseStatus) // HTTP response status is coherent with message status
 }
 
 // Define routes -> TODO: write here your code
@@ -73,20 +73,20 @@ if(config.useStatic) {
   if(config.serveSPA) {
     // We want to server a Single Page Application (SPA)
     app.get('*', (req, res) => {
-      res.sendFile('index.html', { root: config.staticFolder });
-    });
+      res.sendFile('index.html', { root: config.staticFolder })
+    })
   }
   // Handle '*' on /api
-  app.use('/api', apiNotFound); // If a request for the /api/* has not been served => return 404
+  app.use('/api', apiNotFound) // If a request for the /api/* has not been served => return 404
 }
 else {
   // Handle '*' on all requests (/)
-  app.use('/', apiNotFound); // If a request for the /* has not been served => return 404
+  app.use('/', apiNotFound) // If a request for the /* has not been served => return 404
 }
 
 if(config.useHttp) {
   // Starting http server
-  const httpServer = http.createServer(app);
+  const httpServer = http.createServer(app)
 
   // It listens on port httpPort
   httpServer.listen(config.httpPort, () => {
