@@ -70,14 +70,15 @@ if(config.useStatic) {
   // Define static folder
   app.use(express.static(config.staticFolder))
 
+  // Handle '*' on /api
+  app.use('/api', apiNotFound) // If a request for the /api/* has not been served => return 404
+  
   if(config.serveSPA) {
     // We want to server a Single Page Application (SPA)
     app.get('*', (req, res) => {
       res.sendFile('index.html', { root: config.staticFolder })
     })
   }
-  // Handle '*' on /api
-  app.use('/api', apiNotFound) // If a request for the /api/* has not been served => return 404
 }
 else {
   // Handle '*' on all requests (/)
