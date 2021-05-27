@@ -80,7 +80,7 @@ if(config.useStatic) {
     })
   }
 
-  app.all('*', notFound);
+  app.all('*', notFound)
 }
 else {
   // Handle '*' on all requests
