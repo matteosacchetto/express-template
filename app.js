@@ -20,9 +20,9 @@ const httpUtils = require('./lib/http-utils.js')
 
 // Custom middlewares
 const responseStatus = require('./middlewares/response-status.js')
-const apiNotFound = require('./middlewares/api-not-found')
 
 // Custom routes
+const notFound = require('./routes/not-found.js')
 const apiRoute = require('./routes/api.js')
 
 const limiter = rateLimit({
@@ -71,7 +71,7 @@ if(config.useStatic) {
   app.use(express.static(config.staticFolder))
 
   // Handle '*' on /api
-  app.use('/api', apiNotFound) // If a request for the /api/* has not been served => return 404
+  app.all(['/api', '/api/*'], notFound) // If a request for the /api/* has not been served => return 404
   
   if(config.serveSPA) {
     // We want to server a Single Page Application (SPA)
@@ -79,10 +79,12 @@ if(config.useStatic) {
       res.sendFile('index.html', { root: config.staticFolder })
     })
   }
+
+  app.all('*', notFound)
 }
 else {
-  // Handle '*' on all requests (/)
-  app.use('/', apiNotFound) // If a request for the /* has not been served => return 404
+  // Handle '*' on all requests
+  app.all('*', notFound) // If a request for * has not been served => return 404
 }
 
 if(config.useHttp) {
