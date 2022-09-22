@@ -198,7 +198,7 @@ Useful together with morgan
 
 * Enviroment variables used:
   * process.env.NODE_ENV: specify the enviroment (_default="development"_)
-* Version: 3.8.0
+* Version: 3.8.2
 * Website: https://www.npmjs.com/package/winston
 * Documentation: https://www.npmjs.com/package/winston
 * Module name: **winston**
@@ -209,7 +209,7 @@ Useful together with morgan
 
 Module used to access the root path from any file, without the need to use '..' and '.'
 
-* Version: 3.0.0
+* Version: 3.1.0
 * Website: https://www.npmjs.com/package/app-root-path
 * Documentation: https://www.npmjs.com/package/app-root-path
 * Module name: **app-root-path**
@@ -220,7 +220,7 @@ Module used to access the root path from any file, without the need to use '..' 
 
 Module that helps to secure an express-based app by setting various HTTP headers. *It’s not a silver bullet*, but it can help!
 
-* Version: 5.1.0
+* Version: 6.0.0
 * Website: https://helmetjs.github.io/
 * Documentation: https://helmetjs.github.io/docs/
 * Module name: **helmet**
@@ -253,7 +253,7 @@ Helper module to get http status codes and messages
 
 Module to limit the amount of request that can be performed to the server
 
-* Version: 6.4.0
+* Version: 6.6.0
 * Website: https://www.npmjs.com/package/express-rate-limit
 * Documentation: https://www.npmjs.com/package/express-rate-limit
 * Module name: **express-rate-limit**
@@ -264,7 +264,7 @@ Module to limit the amount of request that can be performed to the server
 
 Module to load configuration from a .env file
 
-* Version: 16.0.1
+* Version: 16.0.2
 * Website: https://www.npmjs.com/package/dotenv
 * Documentation: https://www.npmjs.com/package/dotenv
 * Module name: **dotenv**
@@ -297,6 +297,6 @@ Module to create middlewares accessing the body data
 
 Module used to auto-reload the app when changes are detected
 
-* Version: 2.0.18
+* Version: 2.0.20
 * Website: https://nodemon.io/
 * Documentation: https://github.com/remy/nodemon#nodemon
