@@ -1,0 +1,67 @@
+{
+  "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
+  "files": {
+    "include": [
+      "lib/*.js",
+      "routes/*.js",
+      "middlewares/*.js",
+      "app.js",
+      "package.json",
+      "tsconfig.json",
+      "biome.json"
+    ]
+  },
+  "organizeImports": {
+    "enabled": true,
+    "ignore": ["*.json"]
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true,
+      "complexity": {
+        "noUselessConstructor": "warn",
+        "noUselessTernary": "error"
+      },
+      "suspicious": {
+        "noExplicitAny": "warn",
+        "noExportsInTest": "error"
+      },
+      "style": {
+        "useTemplate": "warn",
+        "noUnusedTemplateLiteral": "warn",
+        "noUselessElse": "warn",
+        "noNonNullAssertion": "off",
+        "useSingleVarDeclarator": "off",
+        "useEnumInitializers": "warn",
+        "useExportType": "error",
+        "useImportType": "error",
+        "useNodejsImportProtocol": "error",
+        "useFilenamingConvention": {
+          "level": "info",
+          "options": {
+            "filenameCases": ["kebab-case"],
+            "strictCase": false
+          }
+        },
+        "useConsistentArrayType": "warn"
+      },
+      "correctness": {
+        "noUnusedImports": "warn",
+        "noInvalidUseBeforeDeclaration": "error",
+        "noUnusedPrivateClassMembers": "warn"
+      }
+    }
+  },
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space"
+  },
+  "javascript": {
+    "formatter": {
+      "indentWidth": 2,
+      "quoteStyle": "single",
+      "trailingCommas": "es5"
+    }
+  }
+}
